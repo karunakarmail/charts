@@ -4,25 +4,56 @@ class DonutChart extends HTMLElement {
         this.getChartHtml = this.getChartHtml.bind(this);
         this.getChartData = this.getChartData.bind(this);
 
-        const config = JSON.parse(this.dataset.config);
-        const radius = config.radius;
+        const items = JSON.parse(this.getAttribute('items'));
+        const radius = this.getAttribute('radius');
+        const strokeWidth = this.getAttribute('stroke-width');
+        const size = {
+            width: this.getAttribute('width'),
+            height: this.getAttribute('height')
+        };
+
         const perimeter = 2 * 3.14 * radius;
 
         const shadowRoot = this.attachShadow({mode: 'open'});
 
-        const styleNode = `<style type="text/css">.circle {
-            stroke-dasharray: 0;
-            stroke-dashoffset: ${perimeter};
-            transition: stroke-dashoffset 1s ease;
-        } .text {font-size: 7px;}</style>`;
+        const styleNode = `
+        <style type="text/css">
+            #donut-chart {
+                display: flex;
+            }
 
-        const chartHtml = this.getChartHtml(this.getChartData(config.items), config.strokeWidth, radius);
+            .circle {
+                stroke-dasharray: 0;
+                stroke-dashoffset: ${perimeter};
+                transition: stroke-dashoffset 1s ease;
+            }
+
+            .legend {
+                margin-left: 15px;
+                padding-top: 20px;
+            }
+
+            .legend-item {
+                display: flex;
+                align-items: center;
+                margin-bottom: 5px;
+            }
+
+            .square {
+                border: 1px solid;
+                width: 10px;
+                height: 10px;
+                margin-right: 10px;
+            }
+        </style>`;
+
+        const chartHtml = this.getChartHtml(this.getChartData(items), strokeWidth, radius, size);
 
         shadowRoot.innerHTML = styleNode + chartHtml;
 
         setTimeout(() => {
             this.animateChart(shadowRoot.querySelectorAll(".circle"), perimeter);
-        }, 300);
+        }, 200);
         
     }
 
@@ -44,19 +75,26 @@ class DonutChart extends HTMLElement {
         return chartData;
     }
 
-    getChartHtml(chartData, strokeWidth, radius) {
+    getChartHtml(chartData, strokeWidth, radius, size) {
         let circles = '';
-        let legend = '';
+        let legendItems = '';
+        const center = {
+            x: 50,
+            y: 50
+        };
+       
         chartData.forEach((part) => {
-            circles += `<circle cx="50" cy="50" r="${radius}" fill="transparent" stroke-width="${strokeWidth}" stroke="${part.color}" data-fill="${part.percentage}" class="circle"/>`;
+            circles += `<circle cx="${center.x}" cy="${center.y}" r="${radius}" fill="transparent" stroke-width="${strokeWidth}" stroke="${part.color}" data-fill="${part.percentage}" class="circle"/>`;
+            legendItems += `<div class="legend-item"><div class="square" style="background:${part.color}; border-color: ${part.color}"></div>${part.legend}&nbsp;&nbsp;${part.percentage} %</div>`;
         })
         return `
-        <div>
-            <svg width="300px" height="300px" viewbox="0 0 100 100">
-                <circle cx="50" cy="50" r="${radius}" fill="#eee" id="radius"/>
-                <circle cx="50" cy="50" r="${radius}" fill="transparent" stroke-width="${strokeWidth}" stroke="grey"/>
+        <div id="donut-chart">
+            <svg width="${size.height}" height="${size.width}" viewbox="0 0 100 100">
+                <circle cx="${center.x}" cy="${center.y}" r="${radius}" fill="#eee" id="radius"/>
+                <circle cx="${center.x}" cy="${center.y}" r="${radius}" fill="transparent" stroke-width="${strokeWidth}" stroke="grey"/>
                 ${circles}
             </svg>
+            <div class="legend">${legendItems}</div>
         </div>
         `;
     }
