@@ -1,71 +1,25 @@
-<style type="text/css">
-    .circle {
-        stroke-dasharray: 0;
-        stroke-dashoffset: 251;
-        transition: stroke-dashoffset 1s ease;
-    }
-</style>
-<div id="donut-chart"></div>
 
-<script type="text/javascript">
-    const data = [
-        {
-            color: 'green',
-            percentage: '50'
-        },
-        {
-            color: 'red',
-            percentage: '50'
-        },
-        {
-            color: 'yellow',
-            percentage: '10'
-        }
-    ];
+<donut-chart data-config='{"items": [
+{
+    "color": "green",
+    "percentage": "50",
+    "legend": "VW"
+},
+{
+    "color": "pink",
+    "percentage": "20",
+    "legend": "Opel"
+},
+{
+    "color": "brown",
+    "percentage": "13",
+    "legend": "Mercedes"
+},
+{
+    "color": "blue",
+    "percentage": "1",
+    "legend": "Audi"
+}
+], "radius": 40, "strokeWidth": 20}'></donut-chart>
 
-    /**
-        first: sum of all percentages
-        second: sum of following percentages
-        third: sum of following percentages
-    */
-    let sumOfRest;
-    const progressedData = [];
-    while(data[0]) {
-        sumOfRest = 0;
-        data.forEach((part) => {
-            sumOfRest += parseFloat(part.percentage);
-        })
-        progressedData.push({
-            color: data[0].color,
-            percentage: sumOfRest
-        })
-        data.shift();
-    }
-    
-    let dounutChart = document.querySelector('#donut-chart');
-    let circles;
-    progressedData.forEach((part) => {
-        circles += `<circle cx="50" cy="50" r="40" fill="transparent" stroke-width="20" stroke="${part.color}" data-fill="${part.percentage}" class="circle"/>`;
-    })
-    dounutChart.innerHTML = `
-        <svg width="300px" height="300px" viewbox="0 0 100 100">
-            <circle cx="50" cy="50" r="40" fill="#eee" id="radius"/>
-            <circle cx="50" cy="50" r="40" fill="transparent" stroke-width="20" stroke="grey"/>
-            ${circles}
-        </svg>
-    `;
-
-    window.onload = () => {
-        var radius = parseInt(document.querySelector("#radius").getAttribute("r")); // Get the radius of the circle 
-        var perimeter = 2 * 3.14 * 40;
-        console.log(perimeter)
-        let i = 0;
-        document.querySelectorAll(".circle").forEach((circle) => {
-            var amount = parseFloat(circle.getAttribute("data-fill"));
-            var fillAmount = perimeter - perimeter * amount / 100;
-            circle.style.strokeDasharray = perimeter;
-            circle.style.strokeDashoffset = fillAmount;
-        });
-    };
-</script>
-
+<script src="./donut-chart.js"></script>
