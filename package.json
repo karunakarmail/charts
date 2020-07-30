@@ -1,0 +1,30 @@
+{
+  "name": "donut-chart",
+  "version": "0.0.1",
+  "description": "Web Component",
+  "main": "donut-chart.js",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/frontend-trends/donut-chart.git"
+  },
+  "keywords": [
+    "Web",
+    "Component",
+    "Donut",
+    "Chart",
+    "Donut-Chart"
+  ],
+  "author": "Jeremiah",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/frontend-trends/donut-chart/issues"
+  },
+  "homepage": "https://github.com/frontend-trends/donut-chart#readme",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^8.0.1"
+  }
+}
