@@ -33,7 +33,7 @@ class DonutChart extends HTMLElement {
                 padding-top: 20px;
             }
 
-            .legend-item {
+            .name-item {
                 display: flex;
                 align-items: center;
                 margin-bottom: 5px;
@@ -63,12 +63,12 @@ class DonutChart extends HTMLElement {
         while (config[0]) {
             sumOfRest = 0;
             config.forEach((part) => {
-                sumOfRest += parseFloat(part.percentage);
+                sumOfRest += parseFloat(part.percent);
             })
             chartData.push({
                 color: config[0].color,
-                legend: config[0].legend,
-                percentage: sumOfRest
+                name: config[0].name,
+                percent: sumOfRest
             })
             config.shift();
         }
@@ -77,15 +77,15 @@ class DonutChart extends HTMLElement {
 
     getChartHtml(chartData, strokeWidth, radius, size) {
         let circles = '';
-        let legendItems = '';
+        let nameItems = '';
         const center = {
             x: 50,
             y: 50
         };
        
         chartData.forEach((part) => {
-            circles += `<circle cx="${center.x}" cy="${center.y}" r="${radius}" fill="transparent" stroke-width="${strokeWidth}" stroke="${part.color}" data-fill="${part.percentage}" class="circle"/>`;
-            legendItems += `<div class="legend-item"><div class="square" style="background:${part.color}; border-color: ${part.color}"></div>${part.legend}&nbsp;&nbsp;${part.percentage} %</div>`;
+            circles += `<circle cx="${center.x}" cy="${center.y}" r="${radius}" fill="transparent" stroke-width="${strokeWidth}" stroke="${part.color}" data-fill="${part.percent}" class="circle"/>`;
+            nameItems += `<div class="name-item"><div class="square" style="background:${part.color}; border-color: ${part.color}"></div>${part.name}&nbsp;&nbsp;${part.percent} %</div>`;
         })
         return `
         <div id="donut-chart">
@@ -94,7 +94,7 @@ class DonutChart extends HTMLElement {
                 <circle cx="${center.x}" cy="${center.y}" r="${radius}" fill="transparent" stroke-width="${strokeWidth}" stroke="grey"/>
                 ${circles}
             </svg>
-            <div class="legend">${legendItems}</div>
+            <div class="legend">${nameItems}</div>
         </div>
         `;
     }
