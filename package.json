@@ -2,10 +2,12 @@
   "name": "donut-chart",
   "version": "0.0.1",
   "description": "Web Component",
-  "main": "donut-chart.js",
+  "main": "index.js",
+  "module": "index.js",
   "scripts": {
     "test": "./node_modules/.bin/mocha -r @babel/register",
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "start": "es-dev-server --app-index demo/index.html --node-resolve --open --watch"
   },
   "repository": {
     "type": "git",
@@ -25,11 +27,12 @@
   },
   "homepage": "https://github.com/frontend-trends/donut-chart#readme",
   "devDependencies": {
-    "@babel-register": "^7.0.0",
     "@babel/core": "^7.11.0",
     "@babel/preset-env": "^7.11.0",
+    "@babel/register": "^7.10.5",
     "@rollup/plugin-babel": "^5.1.0",
     "chai": "^4.2.0",
+    "es-dev-server": "^1.57.1",
     "mocha": "^8.0.1",
     "rollup-plugin-uglify": "^6.0.4",
     "webpack": "^4.44.1",

@@ -1,6 +1,6 @@
 import {logic} from './logic';
 
-class DonutChart extends HTMLElement {
+export class DonutChart extends HTMLElement {
     constructor() {
         super();
         this.unHighlightAllChartItems = this.unHighlightAllChartItems.bind(this);
@@ -98,5 +98,3 @@ class DonutChart extends HTMLElement {
         });
     }
 }
-
-customElements.define('donut-chart', DonutChart);

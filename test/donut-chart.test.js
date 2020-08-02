@@ -1,7 +1,8 @@
 let expect = require('chai').expect;
-import {logic} from '../src/donut-chart/logic';
+import {logic} from '../src/logic';
 
 describe('Test <donut-chart> logic', () => {
+
     it('Should calculate the fill amount', () => {
         expect(logic.getFillAmount(100, 251.2)).to.be.equal('0.00');
         expect(logic.getFillAmount(90, 251.2)).to.be.equal('25.12');
