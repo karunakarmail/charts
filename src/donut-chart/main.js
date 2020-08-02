@@ -17,7 +17,7 @@ class DonutChart extends HTMLElement {
 
         const perimeter = 2 * 3.14 * radius;
 
-        const shadowRoot = this.attachShadow({mode: 'open'});
+        const shadowRoot = this.attachShadow({mode: 'closed'});
 
         const styleNode = `
         <style type="text/css">
@@ -52,6 +52,7 @@ class DonutChart extends HTMLElement {
                 display: inline-flex;
                 align-items: center;
                 margin-bottom: 5px;
+                padding: 0 3px;
             }
 
             .name-item.highlighted {
