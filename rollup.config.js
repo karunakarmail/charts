@@ -10,7 +10,7 @@ const config = {
     uglify()
   ],
   output: [
-    { file: './dist/donut-chart.js', format: 'cjs' }
+    { file: './dist/donut-chart.min.js', format: 'cjs' }
   ]
 };
 

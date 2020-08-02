@@ -27,11 +27,12 @@ A small Web Component using [VanillaJS](http://vanilla-js.com/).
     ```
 
 ## Parameters
-| Name   |      Value      |  Description |
-|----------|-------------|------|
-| width |  300 | defines the width of donut chart |
-| height |    300   | defines the height of donut chart |
-| radius | 40 | defines the radius of donut chart |
-| stroke-width | 30 | defines the width of the stroke |
-| items | [{"color": "red","percent": "50","name": "VW"},<br/>{"color": "blue","percent": "20","name": "BMW"}] | data to be represented in donut chart |
+| Name   |      Value      | Mandatory |  Description |
+|----------|-------------|------|------|
+| width |  300 | no | defines the width of donut chart |
+| height |    300   | no | defines the height of donut chart |
+| legend-position | right or bottom | no | defines the position of the legend |
+| radius | 40 | no | defines the radius of donut chart |
+| stroke-width | 30 | no | defines the width of the stroke |
+| items | [{"color": "red","percent": "50","name": "VW"},<br/>{"color": "blue","percent": "20","name": "BMW"}] | yes | data to be represented in donut chart |
     
