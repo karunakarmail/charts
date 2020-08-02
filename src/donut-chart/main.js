@@ -1,11 +1,11 @@
 class DonutChart extends HTMLElement {
     constructor() {
         super();
-        this.getChartHtml = this.getChartHtml.bind(this);
+        this.getHtml = this.getHtml.bind(this);
         this.getChartData = this.getChartData.bind(this);
 
         const items = JSON.parse(this.getAttribute('items'));
-        const radius = this.getAttribute('radius');
+        const radius = parseInt(this.getAttribute('radius'));
         const strokeWidth = this.getAttribute('stroke-width');
         const size = {
             width: this.getAttribute('width'),
@@ -47,12 +47,12 @@ class DonutChart extends HTMLElement {
             }
         </style>`;
 
-        const chartHtml = this.getChartHtml(this.getChartData(items), strokeWidth, radius, size);
+        const chartHtml = this.getHtml(this.getChartData(items), strokeWidth, radius, size);
 
         shadowRoot.innerHTML = styleNode + chartHtml;
 
         setTimeout(() => {
-            this.animateChart(shadowRoot.querySelectorAll(".circle"), perimeter);
+            this.animate(shadowRoot.querySelectorAll(".circle"), perimeter);
         }, 200);
         
     }
@@ -75,7 +75,7 @@ class DonutChart extends HTMLElement {
         return chartData;
     }
 
-    getChartHtml(chartData, strokeWidth, radius, size) {
+    getHtml(chartData, strokeWidth, radius, size) {
         let circles = '';
         let nameItems = '';
         const center = {
@@ -99,7 +99,7 @@ class DonutChart extends HTMLElement {
         `;
     }
 
-    animateChart(circles, perimeter) {
+    animate(circles, perimeter) {
         circles.forEach((circle) => {
             var amount = parseFloat(circle.getAttribute("data-fill"));
             var fillAmount = perimeter - perimeter * amount / 100;

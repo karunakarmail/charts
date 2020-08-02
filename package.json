@@ -4,7 +4,8 @@
   "description": "Web Component",
   "main": "donut-chart.js",
   "scripts": {
-    "test": "./node_modules/.bin/mocha"
+    "test": "./node_modules/.bin/mocha",
+    "build": "rollup -c"
   },
   "repository": {
     "type": "git",
@@ -24,7 +25,13 @@
   },
   "homepage": "https://github.com/frontend-trends/donut-chart#readme",
   "devDependencies": {
+    "@babel/core": "^7.11.0",
+    "@babel/preset-env": "^7.11.0",
+    "@rollup/plugin-babel": "^5.1.0",
     "chai": "^4.2.0",
-    "mocha": "^8.0.1"
+    "mocha": "^8.0.1",
+    "rollup-plugin-uglify": "^6.0.4",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12"
   }
 }
