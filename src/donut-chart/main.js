@@ -1,28 +1,24 @@
+import {logic} from './logic';
+
 class DonutChart extends HTMLElement {
     constructor() {
         super();
         this.getHtml = this.getHtml.bind(this);
         this.getChartData = this.getChartData.bind(this);
-        this.highlightClass = 'highlighted';
+        this.unHighlightAllChartItems = this.unHighlightAllChartItems.bind(this);
+        this.highlightChartItem = this.highlightChartItem.bind(this);
+        this.unHighlightChartItem = this.unHighlightChartItem.bind(this);
 
-        const items = JSON.parse(this.getAttribute('items'));
+        this.highlightClass = 'highlight';
 
-        const legendPositon = this.getAttribute('legend-position') || 'bottom';
-        const radius = parseInt(this.getAttribute('radius')) || 40;
-        const strokeWidth = this.getAttribute('stroke-width') || 20;
-        const size = {
-            width: this.getAttribute('width') || 250,
-            height: this.getAttribute('height') ||250
-        };
-
-        const perimeter = 2 * 3.14 * radius;
+        const attributes = logic.getAttributes(this);
 
         const shadowRoot = this.attachShadow({mode: 'closed'});
 
         const styleNode = `
         <style type="text/css">
             #donut-chart {
-                ${legendPositon === 'right' && 'display: flex;'}
+                ${attributes.legendPositon === 'right' && 'display: flex;'}
             }
 
             @media screen and (max-width:600px) {
@@ -33,12 +29,12 @@ class DonutChart extends HTMLElement {
 
             .circle {
                 stroke-dasharray: 0;
-                stroke-dashoffset: ${perimeter};
+                stroke-dashoffset: ${attributes.perimeter};
                 transition: stroke-dashoffset .3s ease;
             }
 
-            .circle.highlighted {
-                stroke: #a8d1ff;
+            .circle.highlight {
+                stroke: ${attributes.highlightColor};
             }
 
             .legend {
@@ -55,8 +51,8 @@ class DonutChart extends HTMLElement {
                 padding: 0 3px;
             }
 
-            .name-item.highlighted {
-                background: #a8d1ff;
+            .name-item.highlight {
+                background: ${attributes.highlightColor};
             }
 
             .square {
@@ -67,14 +63,12 @@ class DonutChart extends HTMLElement {
             }
         </style>`;
 
-        const chartHtml = this.getHtml(this.getChartData(items), strokeWidth, radius, size);
-
-        shadowRoot.innerHTML = styleNode + chartHtml;
+        shadowRoot.innerHTML = styleNode + this.getHtml(this.getChartData(attributes.items), attributes.strokeWidth, attributes.radius, attributes.size);
 
         const circles = shadowRoot.querySelectorAll(".circle");
 
         setTimeout(() => {
-            this.animate(circles, perimeter);
+            this.animate(circles, attributes.perimeter);
         }, 100);
 
         const nameItems = shadowRoot.querySelectorAll(".name-item");
@@ -83,14 +77,14 @@ class DonutChart extends HTMLElement {
                 if (e.currentTarget.classList.contains(this.highlightClass)) {
                     this.unHighlightChartItem(e.currentTarget, circles[index]);
                 } else {
-                    this.removeHighlights(shadowRoot.querySelectorAll(`.${this.highlightClass}`));
+                    this.unHighlightAllChartItems(shadowRoot.querySelectorAll(`.${this.highlightClass}`));
                     this.highlightChartItem(e.currentTarget, circles[index]);
                 }
             });
         });
     }
 
-    removeHighlights(highlightedElements) {
+    unHighlightAllChartItems(highlightedElements) {
         highlightedElements.forEach((highlightedElement) => {
             highlightedElement.classList.remove(this.highlightClass);
         });
