@@ -11,8 +11,7 @@ export const logic = {
             width: parseInt(element.getAttribute('width')) || 250,
             height: parseInt(element.getAttribute('height')) ||250
         };
-        attributes.perimeter = 2 * 3.14 * attributes.radius;
-
+        attributes.perimeter = parseFloat(2 * 3.14 * attributes.radius).toFixed(2);
         return attributes;
     },
 
@@ -35,7 +34,7 @@ export const logic = {
     },
 
     getFillAmount(amount, perimeter) {
-        return perimeter - perimeter * amount / 100;
+        return parseFloat(perimeter - perimeter * amount / 100).toFixed(2);
     },
 
     getHtml(chartData, strokeWidth, radius, size) {
