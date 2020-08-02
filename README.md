@@ -35,5 +35,5 @@ A small Web Component using [VanillaJS](http://vanilla-js.com/).
 | highlight-color | #a8d1ff | no | defines the highlight color |
 | radius | 40 | no | defines the radius of donut chart |
 | stroke-width | 30 | no | defines the width of the stroke |
-| items | [{"color": "red","percent": "50","name": "VW"},<br/>{"color": "blue","percent": "20","name": "BMW"}] | yes | data to be represented in donut chart |
+| items | [```{"color": "red","percent": "50","name": "VW"}, ...```] | yes | data to be represented in donut chart |
     
