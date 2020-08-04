@@ -34,7 +34,7 @@ A small Web Component using [VanillaJS](http://vanilla-js.com/).
 | legend-position | right | defines the legend position |
 | highlight-color | #a8d1ff | defines the highlight color |
 | radius | 40 | defines the donut radius |
-| stroke-width | 30 | defines the width of donut pieces |
+| stroke-width | 30 | defines the stroke width of the donut |
 | data | | stringified JSON |
     
 ### data attribute format
