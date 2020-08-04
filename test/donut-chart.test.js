@@ -37,8 +37,8 @@ describe('<donut-chart>', () => {
         expect(circles[1].getAttribute('data-fill')).toEqual('10');
 
         await TestUtils.sleep(100);
-        expect(circles[0].getAttribute('style')).toEqual('stroke-dasharray: 251.2; stroke-dashoffset: 25.12;');
-        expect(circles[1].getAttribute('style')).toEqual('stroke-dasharray: 251.2; stroke-dashoffset: 226.08;');
+        expect(circles[0].getAttribute('style')).toEqual('stroke-dasharray: 251.2px; stroke-dashoffset: 25.12px;');
+        expect(circles[1].getAttribute('style')).toEqual('stroke-dasharray: 251.2px; stroke-dashoffset: 226.08px;');
 
         // legend start
         const legendItems = shadowRoot.querySelectorAll('.legend .name-item');

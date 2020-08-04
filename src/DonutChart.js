@@ -89,8 +89,8 @@ export class DonutChart extends HTMLElement {
 
     animate(circles, perimeter) {
         circles.forEach((circle) => {
-            circle.style.strokeDasharray = perimeter;
-            circle.style.strokeDashoffset = this.getFillAmount(parseFloat(circle.getAttribute('data-fill')), perimeter);
+            circle.style.strokeDasharray = `${perimeter}px`;
+            circle.style.strokeDashoffset = `${this.getFillAmount(parseFloat(circle.getAttribute('data-fill')), perimeter)}px`;
         });
     }
 

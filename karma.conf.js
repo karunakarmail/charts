@@ -3,7 +3,7 @@ module.exports = function(config) {
       basePath: "",
       frameworks: ["jasmine"],
       files: [
-        { pattern: "test/**/*.test.js", watched: false  }
+        { pattern: "test/**/*.test.js", watched: false }
       ],
       preprocessors: {
         './test/**/*.test.js': [ 'rollup' ]
@@ -22,7 +22,7 @@ module.exports = function(config) {
       colors: true,
       logLevel: config.LOG_INFO,
       autoWatch: true,
-      browsers: ["Chrome"],
+      browsers: ["Chrome", "Firefox", "Safari"],
       singleRun: true,
       concurrency: Infinity
     });
