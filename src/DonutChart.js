@@ -7,14 +7,9 @@ export class DonutChart extends HTMLElement {
 
     constructor() {
         super();
-        this.unHighlightAllChartItems = this.unHighlightAllChartItems.bind(this);
-        this.highlightChartItem = this.highlightChartItem.bind(this);
-        this.animate = this.animate.bind(this);
-
         this.highlightClass = 'highlight';
 
         const attributes = logic.getAttributes(this);
-
         const shadowRoot = this.attachShadow({mode: 'open'});
 
         const styleNode = `

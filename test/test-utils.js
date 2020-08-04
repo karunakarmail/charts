@@ -1,4 +1,9 @@
 export class TestUtils {
+
+    static sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
     /**
      * Renders a given element with provided attributes
      * and returns a promise which resolves as soon as
@@ -34,8 +39,8 @@ export class TestUtils {
      */
     static _mapObjectToHTMLAttributes(attributes) {
       return Object.entries(attributes).reduce((previous, current) => {
-        return previous + ` ${current[0]}="${current[1]}"`;
-      }, "");
+        return previous + ` ${current[0]}='${current[1]}'`;
+      }, '');
     }
   
     /**

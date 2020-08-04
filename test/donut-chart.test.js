@@ -1,10 +1,61 @@
-import { DonutChart } from "../src/DonutChart";
+import { DonutChart } from '../src/DonutChart';
 import { TestUtils } from './test-utils';
+window.customElements.define('donut-chart', DonutChart);
 
-describe("test", () => {
-    it("true is true", async () => {
-        const {shadowRoot} = await TestUtils.render(DonutChart.tag);
-        const value = shadowRoot.innerHTML.includes("Hello, World!"); 
-        expect(value).toBeTruthy();
+describe('<donut-chart>', () => {
+    it('should render', async () => {
+        const {shadowRoot} = await TestUtils.render(DonutChart.tag, {
+            items: JSON.stringify([
+                {
+                    color: '#555594',
+                    percent: '80',
+                    name: 'Strongly agree'
+                },
+                {
+                    color: '#28dcc5',
+                    percent: '10',
+                    name: 'Somewhat agree'
+                }
+            ]),
+            width: 200,
+            height: 200,
+            radius: 40,
+            'stroke-width': 20,
+            'legend-position': "right"
+        });
+        const circles = shadowRoot.querySelectorAll('circle.circle');
+        expect(circles.length).toEqual(2);
+        circles.forEach((circle) => {
+            expect(circle.getAttribute('stroke-width')).toEqual('20');
+            expect(circle.getAttribute('r')).toEqual('40');
+            expect(circle.getAttribute('cx')).toEqual('50');
+            expect(circle.getAttribute('cy')).toEqual('50');
+        });
+        expect(circles[0].getAttribute('stroke')).toEqual('#555594');
+        expect(circles[0].getAttribute('data-fill')).toEqual('90');
+        expect(circles[1].getAttribute('stroke')).toEqual('#28dcc5');
+        expect(circles[1].getAttribute('data-fill')).toEqual('10');
+
+        await TestUtils.sleep(100);
+        expect(circles[0].getAttribute('style')).toEqual('stroke-dasharray: 251.2; stroke-dashoffset: 25.12;');
+        expect(circles[1].getAttribute('style')).toEqual('stroke-dasharray: 251.2; stroke-dashoffset: 226.08;');
+
+        // legend start
+        const legendItems = shadowRoot.querySelectorAll('.legend .name-item');
+        expect(legendItems.length).toEqual(2);
+        expect(shadowRoot.querySelectorAll('.legend .name-item.highlight').length).toEqual(0);
+        expect(legendItems[0].textContent).toEqual('Strongly agree  90 %');
+        expect(legendItems[1].textContent).toEqual('Somewhat agree  10 %');
+
+        legendItems[0].click();
+        expect(legendItems[0].classList.contains('highlight')).toBeTrue;
+        legendItems[0].click();
+        expect(legendItems[0].classList.contains('highlight')).toBeFalse;
+
+        legendItems[0].click();
+        legendItems[1].click();
+        expect(legendItems[0].classList.contains('highlight')).toBeFalse;
+        expect(legendItems[1].classList.contains('highlight')).toBeTrue;
+        // legend end
     });
 });
