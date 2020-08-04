@@ -96,7 +96,7 @@ export class DonutChart extends HTMLElement {
 
     getAttributes(element) {
         const attributes = {};
-        attributes.items = JSON.parse(element.getAttribute('items'));
+        attributes.items = JSON.parse(element.getAttribute('data'));
 
         attributes.legendPositon = element.getAttribute('legend-position') || 'bottom';
         attributes.radius = parseInt(element.getAttribute('radius')) || 40;
