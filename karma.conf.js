@@ -9,7 +9,7 @@ module.exports = function(config) {
         './test/**/*.test.js': [ 'rollup' ]
       },
       rollupPreprocessor: {
-        plugins: [require('rollup-plugin-buble')()],
+        plugins: [require('rollup-plugin-babel')({runtimeHelpers: true})],
         output: {
             format: 'iife', // Helps prevent naming collisions.
             name: 'donut-chart.js', // Required for 'iife' format.

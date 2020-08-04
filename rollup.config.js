@@ -2,10 +2,11 @@ import { getBabelOutputPlugin } from '@rollup/plugin-babel';
 import { uglify } from "rollup-plugin-uglify";
 
 const config = {
-  input: 'src/donut-chart/main.js',
+  input: './donut-chart.js',
   plugins: [
     getBabelOutputPlugin({
-      presets: ['@babel/preset-env']
+      presets: ['@babel/preset-env'],
+      runtimeHelpers: true
     }),
     uglify()
   ],

@@ -1,6 +1,10 @@
 import {logic} from './logic';
 
 export class DonutChart extends HTMLElement {
+    static get tag() {
+        return "donut-chart";
+    }
+
     constructor() {
         super();
         this.unHighlightAllChartItems = this.unHighlightAllChartItems.bind(this);
@@ -11,7 +15,7 @@ export class DonutChart extends HTMLElement {
 
         const attributes = logic.getAttributes(this);
 
-        const shadowRoot = this.attachShadow({mode: 'closed'});
+        const shadowRoot = this.attachShadow({mode: 'open'});
 
         const styleNode = `
         <style type="text/css">

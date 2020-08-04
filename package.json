@@ -28,6 +28,7 @@
   "homepage": "https://github.com/frontend-trends/donut-chart#readme",
   "devDependencies": {
     "@babel/core": "^7.11.0",
+    "@babel/plugin-transform-runtime": "^7.11.0",
     "@babel/preset-env": "^7.11.0",
     "@babel/register": "^7.10.5",
     "@rollup/plugin-babel": "^5.1.0",
@@ -40,6 +41,7 @@
     "karma-jasmine": "^3.3.1",
     "karma-rollup-preprocessor": "^7.0.5",
     "karma-spec-reporter": "0.0.32",
+    "rollup-plugin-babel": "^4.4.0",
     "rollup-plugin-buble": "^0.19.8",
     "rollup-plugin-uglify": "^6.0.4"
   }
