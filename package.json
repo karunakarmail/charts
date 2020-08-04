@@ -1,6 +1,6 @@
 {
   "name": "donut-chart",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Web Component",
   "main": "index.js",
   "module": "index.js",
