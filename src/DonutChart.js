@@ -94,9 +94,13 @@ export class DonutChart extends HTMLElement {
         });
     }
 
+    sortItems(array) {
+        return array.sort((a, b) => b.percent - a.percent);
+    }
+
     getAttributes(element) {
         const attributes = {};
-        attributes.items = JSON.parse(element.getAttribute('data'));
+        attributes.items = this.sortItems(JSON.parse(element.getAttribute('data')));
 
         attributes.legendPositon = element.getAttribute('legend-position') || 'bottom';
         attributes.radius = parseInt(element.getAttribute('radius')) || 40;
@@ -121,6 +125,7 @@ export class DonutChart extends HTMLElement {
             chartData.push({
                 color: config[0].color,
                 name: config[0].name,
+                originPercent: config[0].percent,
                 percent: sumOfRest
             })
             config.shift();
@@ -144,9 +149,9 @@ export class DonutChart extends HTMLElement {
             <svg width="${size.height}" height="${size.width}" viewbox="0 0 100 100">
                 <circle cx="${center.x}" cy="${center.y}" r="${radius}" fill="#eee" id="radius"/>
                 <circle cx="${center.x}" cy="${center.y}" r="${radius}" fill="transparent" stroke-width="${strokeWidth}" stroke="grey"/>
-                ${chartData.map((part) => {
-                    nameItems += `<div class="name-item"><div class="square" style="background:${part.color}; border-color: ${part.color}"></div>${part.name}&nbsp;&nbsp;${part.percent} %</div><br/>`;
-                    return `<circle cx="${center.x}" cy="${center.y}" r="${radius}" fill="transparent" stroke-width="${strokeWidth}" stroke="${part.color}" data-fill="${part.percent}" class="circle"/>`;
+                ${chartData.map((item) => {
+                    nameItems += `<div class="name-item"><div class="square" style="background:${item.color}; border-color: ${item.color}"></div>${item.name}&nbsp;&nbsp;${item.originPercent} %</div><br/>`;
+                    return `<circle cx="${center.x}" cy="${center.y}" r="${radius}" fill="transparent" stroke-width="${strokeWidth}" stroke="${item.color}" data-fill="${item.percent}" class="circle"/>`;
                 })}
             </svg>
             <div class="legend">${nameItems}</div>

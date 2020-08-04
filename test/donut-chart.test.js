@@ -5,15 +5,15 @@ window.customElements.define('donut-chart', DonutChart);
 describe('<donut-chart>', () => {
     it('should render', async () => {
         const {shadowRoot} = await TestUtils.render(DonutChart.tag, {
-            items: JSON.stringify([
+            data: JSON.stringify([
                 {
                     color: '#555594',
-                    percent: '80',
+                    percent: 80,
                     name: 'Strongly agree'
                 },
                 {
                     color: '#28dcc5',
-                    percent: '10',
+                    percent: 10,
                     name: 'Somewhat agree'
                 }
             ]),
@@ -44,7 +44,7 @@ describe('<donut-chart>', () => {
         const legendItems = shadowRoot.querySelectorAll('.legend .name-item');
         expect(legendItems.length).toEqual(2);
         expect(shadowRoot.querySelectorAll('.legend .name-item.highlight').length).toEqual(0);
-        expect(legendItems[0].textContent).toEqual('Strongly agree  90 %');
+        expect(legendItems[0].textContent).toEqual('Strongly agree  80 %');
         expect(legendItems[1].textContent).toEqual('Somewhat agree  10 %');
 
         legendItems[0].click();
@@ -59,6 +59,44 @@ describe('<donut-chart>', () => {
         // legend end
     });
 
+    it('should sort and apply default atributes', async () => {
+        const {shadowRoot} = await TestUtils.render(DonutChart.tag, {
+            data: JSON.stringify([
+                {
+                    color: '#555594',
+                    percent: 40,
+                    name: 'Strongly agree'
+                },
+                {
+                    color: '#28dcc5',
+                    percent: 50,
+                    name: 'Somewhat agree'
+                }
+            ])
+        });
+        const circles = shadowRoot.querySelectorAll('circle.circle');
+        expect(circles.length).toEqual(2);
+        circles.forEach((circle) => {
+            expect(circle.getAttribute('stroke-width')).toEqual('20');
+            expect(circle.getAttribute('r')).toEqual('40');
+            expect(circle.getAttribute('cx')).toEqual('50');
+            expect(circle.getAttribute('cy')).toEqual('50');
+        });
+        expect(circles[0].getAttribute('data-fill')).toEqual('90');
+        expect(circles[0].getAttribute('stroke')).toEqual('#28dcc5');
+        expect(circles[1].getAttribute('data-fill')).toEqual('40');
+        expect(circles[1].getAttribute('stroke')).toEqual('#555594');
+
+        await TestUtils.sleep(100);
+        expect(circles[0].getAttribute('style')).toEqual('stroke-dasharray: 251.2px; stroke-dashoffset: 25.12px;');
+        expect(circles[1].getAttribute('style')).toEqual('stroke-dasharray: 251.2px; stroke-dashoffset: 150.72px;');
+
+        const legendItems = shadowRoot.querySelectorAll('.legend .name-item');
+        expect(legendItems.length).toEqual(2);
+        expect(legendItems[0].textContent).toEqual('Somewhat agree  50 %');
+        expect(legendItems[1].textContent).toEqual('Strongly agree  40 %');
+    });
+
     it('Should calculate the fill amount', () => {
         expect(DonutChart.prototype.getFillAmount(100, 251.2)).toEqual('0.00');
         expect(DonutChart.prototype.getFillAmount(90, 251.2)).toEqual('25.12');
@@ -70,7 +108,7 @@ describe('<donut-chart>', () => {
         let chartConfig = [
             {
                 "color": "#555594",
-                "percent": "80",
+                "percent": 80,
                 "name": "Strongly agree"
             }
         ];
@@ -78,6 +116,7 @@ describe('<donut-chart>', () => {
             {
                 "color": "#555594",
                 "name": "Strongly agree",
+                "originPercent": 80,
                 "percent": 80
             }
         ]);
@@ -85,12 +124,12 @@ describe('<donut-chart>', () => {
         chartConfig = [
             {
                 "color": "#555594",
-                "percent": "60",
+                "percent": 60,
                 "name": "Strongly agree"
             },
             {
                 "color": "blue",
-                "percent": "30",
+                "percent": 30,
                 "name": "Somewhat agree"
             }
         ];
@@ -98,11 +137,13 @@ describe('<donut-chart>', () => {
             {
                 "color": "#555594",
                 "name": "Strongly agree",
+                "originPercent": 60,
                 "percent": 90
             },
             {
                 "color": "blue",
                 "name": "Somewhat agree",
+                "originPercent": 30,
                 "percent": 30
             }
         ]);
@@ -110,12 +151,12 @@ describe('<donut-chart>', () => {
         chartConfig = [
             {
                 "color": "#555594",
-                "percent": "0.5",
+                "percent": 0.5,
                 "name": "Strongly agree"
             },
             {
                 "color": "blue",
-                "percent": "0.2",
+                "percent": 0.2,
                 "name": "Somewhat agree"
             }
         ];
@@ -123,11 +164,13 @@ describe('<donut-chart>', () => {
             {
                 "color": "#555594",
                 "name": "Strongly agree",
+                "originPercent": 0.5,
                 "percent": 0.7
             },
             {
                 "color": "blue",
                 "name": "Somewhat agree",
+                "originPercent": 0.2,
                 "percent": 0.2
             }
         ]);
