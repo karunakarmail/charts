@@ -58,4 +58,78 @@ describe('<donut-chart>', () => {
         expect(legendItems[1].classList.contains('highlight')).toBeTrue;
         // legend end
     });
+
+    it('Should calculate the fill amount', () => {
+        expect(DonutChart.prototype.getFillAmount(100, 251.2)).toEqual('0.00');
+        expect(DonutChart.prototype.getFillAmount(90, 251.2)).toEqual('25.12');
+        expect(DonutChart.prototype.getFillAmount(50, 251.2)).toEqual('125.60');
+        expect(DonutChart.prototype.getFillAmount(0, 251.2)).toEqual('251.20');
+    });
+
+    it('Should process chart data', () => {
+        let chartConfig = [
+            {
+                "color": "#555594",
+                "percent": "80",
+                "name": "Strongly agree"
+            }
+        ];
+        expect(DonutChart.prototype.processChartData(chartConfig)).toEqual([
+            {
+                "color": "#555594",
+                "name": "Strongly agree",
+                "percent": 80
+            }
+        ]);
+
+        chartConfig = [
+            {
+                "color": "#555594",
+                "percent": "60",
+                "name": "Strongly agree"
+            },
+            {
+                "color": "blue",
+                "percent": "30",
+                "name": "Somewhat agree"
+            }
+        ];
+        expect(DonutChart.prototype.processChartData(chartConfig)).toEqual([
+            {
+                "color": "#555594",
+                "name": "Strongly agree",
+                "percent": 90
+            },
+            {
+                "color": "blue",
+                "name": "Somewhat agree",
+                "percent": 30
+            }
+        ]);
+
+        chartConfig = [
+            {
+                "color": "#555594",
+                "percent": "0.5",
+                "name": "Strongly agree"
+            },
+            {
+                "color": "blue",
+                "percent": "0.2",
+                "name": "Somewhat agree"
+            }
+        ];
+        expect(DonutChart.prototype.processChartData(chartConfig)).toEqual([
+            {
+                "color": "#555594",
+                "name": "Strongly agree",
+                "percent": 0.7
+            },
+            {
+                "color": "blue",
+                "name": "Somewhat agree",
+                "percent": 0.2
+            }
+        ]);
+    });
 });

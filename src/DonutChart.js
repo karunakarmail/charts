@@ -1,5 +1,3 @@
-import {logic} from './logic';
-
 export class DonutChart extends HTMLElement {
     static get tag() {
         return "donut-chart";
@@ -9,7 +7,7 @@ export class DonutChart extends HTMLElement {
         super();
         this.highlightClass = 'highlight';
 
-        const attributes = logic.getAttributes(this);
+        const attributes = this.getAttributes(this);
         const shadowRoot = this.attachShadow({mode: 'open'});
 
         const styleNode = `
@@ -18,8 +16,7 @@ export class DonutChart extends HTMLElement {
                 ${attributes.legendPositon === 'right' && 'display: flex;'}
             }
 
-            @media screen and (max-width:
-                600px) {
+            @media screen and (max-width: 600px) {
                 #donut-chart {
                     display: block;
                 }
@@ -61,13 +58,13 @@ export class DonutChart extends HTMLElement {
             }
         </style>`;
 
-        shadowRoot.innerHTML = styleNode + logic.getHtml(logic.processChartData(attributes.items), attributes.strokeWidth, attributes.radius, attributes.size);
+        shadowRoot.innerHTML = styleNode + this.getHtml(this.processChartData(attributes.items), attributes.strokeWidth, attributes.radius, attributes.size);
 
-        const circles = shadowRoot.querySelectorAll(".circle");
-        const nameItems = shadowRoot.querySelectorAll(".name-item");
+        const circles = shadowRoot.querySelectorAll('.circle');
+        const nameItems = shadowRoot.querySelectorAll('.name-item');
 
         setTimeout(() => {
-            this.animate(circles, attributes.perimeter, logic);
+            this.animate(circles, attributes.perimeter);
         }, 100);
 
         nameItems.forEach((nameItem, index) => {
@@ -90,10 +87,70 @@ export class DonutChart extends HTMLElement {
         nameItem.classList.toggle(this.highlightClass, !toggleCondition);
     }
 
-    animate(circles, perimeter, logic) {
+    animate(circles, perimeter) {
         circles.forEach((circle) => {
             circle.style.strokeDasharray = perimeter;
-            circle.style.strokeDashoffset = logic.getFillAmount(parseFloat(circle.getAttribute("data-fill")), perimeter);
+            circle.style.strokeDashoffset = this.getFillAmount(parseFloat(circle.getAttribute('data-fill')), perimeter);
         });
+    }
+
+    getAttributes(element) {
+        const attributes = {};
+        attributes.items = JSON.parse(element.getAttribute('items'));
+
+        attributes.legendPositon = element.getAttribute('legend-position') || 'bottom';
+        attributes.radius = parseInt(element.getAttribute('radius')) || 40;
+        attributes.strokeWidth = parseInt(element.getAttribute('stroke-width')) || 20;
+        attributes.highlightColor = element.getAttribute('highlight-color') || '#a8d1ff';
+        attributes.size = {
+            width: parseInt(element.getAttribute('width')) || 250,
+            height: parseInt(element.getAttribute('height')) ||250
+        };
+        attributes.perimeter = parseFloat(2 * 3.14 * attributes.radius).toFixed(2);
+        return attributes;
+    }
+
+    processChartData(config) {
+        let sumOfRest;
+        const chartData = [];
+        while (config[0]) {
+            sumOfRest = 0;
+            config.forEach((part) => {
+                sumOfRest += parseFloat(part.percent);
+            })
+            chartData.push({
+                color: config[0].color,
+                name: config[0].name,
+                percent: sumOfRest
+            })
+            config.shift();
+        }
+        return chartData;
+    }
+
+    getFillAmount(amount, perimeter) {
+        return parseFloat(perimeter - perimeter * amount / 100).toFixed(2);
+    }
+
+    getHtml(chartData, strokeWidth, radius, size) {
+        let nameItems = '';
+        const center = {
+            x: 50,
+            y: 50
+        };
+       
+        return `
+        <div id="donut-chart">
+            <svg width="${size.height}" height="${size.width}" viewbox="0 0 100 100">
+                <circle cx="${center.x}" cy="${center.y}" r="${radius}" fill="#eee" id="radius"/>
+                <circle cx="${center.x}" cy="${center.y}" r="${radius}" fill="transparent" stroke-width="${strokeWidth}" stroke="grey"/>
+                ${chartData.map((part) => {
+                    nameItems += `<div class="name-item"><div class="square" style="background:${part.color}; border-color: ${part.color}"></div>${part.name}&nbsp;&nbsp;${part.percent} %</div><br/>`;
+                    return `<circle cx="${center.x}" cy="${center.y}" r="${radius}" fill="transparent" stroke-width="${strokeWidth}" stroke="${part.color}" data-fill="${part.percent}" class="circle"/>`;
+                })}
+            </svg>
+            <div class="legend">${nameItems}</div>
+        </div>
+        `;
     }
 }
