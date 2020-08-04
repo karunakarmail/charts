@@ -4,6 +4,9 @@
   "description": "Web Component",
   "main": "index.js",
   "module": "index.js",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
   "scripts": {
     "test": "karma start",
     "build": "rollup -c",
