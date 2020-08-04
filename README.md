@@ -41,5 +41,5 @@ A small Web Component using [VanillaJS](http://vanilla-js.com/).
 Provide a stringified Array of Objects.
 
 ```html
-    "[{"color":"red","percent":"50","name":"VW"},{"color":"#28dcc5","percent":"10","name":"Somewhat agree"}]"
+    "[{"color":"red","percent":"50","name":"VW"},{"color":"#28dcc5","percent":"10","name":"Audi"}]"
 ```
