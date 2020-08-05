@@ -9,7 +9,7 @@ module.exports = function(config) {
         './test/**/*.test.js': [ 'rollup' ]
       },
       rollupPreprocessor: {
-        plugins: [require('rollup-plugin-babel')({runtimeHelpers: true})],
+        plugins: [],
         output: {
             format: 'iife', // Helps prevent naming collisions.
             name: 'donut-chart.js', // Required for 'iife' format.
@@ -22,7 +22,7 @@ module.exports = function(config) {
       colors: true,
       logLevel: config.LOG_INFO,
       autoWatch: true,
-      browsers: ["Chrome", "Firefox", "Safari"],
+      browsers: ["Chrome", "Safari", "Firefox"],
       singleRun: true,
       concurrency: Infinity
     });
