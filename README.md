@@ -1,7 +1,7 @@
 # &lt;donut-chart&gt;
 
 A small Web Component using [VanillaJS](http://vanilla-js.com/). <br/>
-This webcomponent follows the open-wc recommendation.
+This webcomponent follows the [open-wc](https://github.com/open-wc/open-wc) recommendation.
 
 ## Installation
 
@@ -45,3 +45,9 @@ Provide a stringified Array of Objects.
 
 ## Demo
 [Test it live!](http://frontend-trends.github.io/donut-chart)
+
+## Testing using Karma
+
+```html
+npm run test
+```
