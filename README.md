@@ -1,10 +1,9 @@
 # &lt;donut-chart&gt;
 
-A small Web Component using [VanillaJS](http://vanilla-js.com/).
+A small Web Component using [VanillaJS](http://vanilla-js.com/). <br/>
+This webcomponent follows the open-wc recommendation.
 
-## Demo
-
-[Test it live!](http://frontend-trends.github.io/donut-chart)
+## Installation
 
 ```html
 npm i @frontend-trends/donut-chart -D
@@ -12,24 +11,18 @@ npm i @frontend-trends/donut-chart -D
 
 ## Usage
 
-1. Import polyfill:
+```html
+<script type="module">
+    import '@frontend-trends/donut-chart/donut-chart.js';
+</script>
 
-    ```html
-    <script src="node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
-    ```
-    [Link to source](https://github.com/webcomponents/polyfills/tree/master/packages/webcomponentsjs)
+<donut-chart></donut-chart>
+```
 
-2. Import custom element:
-
-    ```html
-    import '@frontend-trends/donut-chart'; 
-    ```
-
-3. Start using it!
-
-    ```html
-    <donut-chart></donut-chart>
-    ```
+For old browser add polyfill
+```html
+<script src="node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+```
 
 ## Attributes
 | Attribute   |      Default      |  Description |
@@ -49,3 +42,6 @@ Provide a stringified Array of Objects.
 ```html
 "[{"color":"red","percent":"50","name":"VW"},{"color":"#28dcc5","percent":"10","name":"Audi"}]"
 ```
+
+## Demo
+[Test it live!](http://frontend-trends.github.io/donut-chart)
