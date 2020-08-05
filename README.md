@@ -3,6 +3,8 @@
 A small Web Component using [VanillaJS](http://vanilla-js.com/). <br/>
 This webcomponent follows the [open-wc](https://github.com/open-wc/open-wc) recommendation.
 
+[Test it live!](http://donut-chart.surge.sh)
+
 ## Installation
 
 ```html
@@ -45,17 +47,6 @@ For old browser add polyfill
 | radius | 40 | defines the donut radius |
 | stroke-width | 30 | defines the stroke width of the donut |
 | data |  | stringified Array of Objects |
-    
-
-## The data attribute
-
-Provide a stringified Array of Objects.
-```html
-"[{"color":"red","percent":"50","name":"VW"},{"color":"#28dcc5","percent":"10","name":"Audi"}]"
-```
-
-## Demo
-[Test it live!](http://frontend-trends.github.io/donut-chart)
 
 ## Testing using Karma
 
