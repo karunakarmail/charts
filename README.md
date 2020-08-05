@@ -11,8 +11,9 @@ A small Web Component using [VanillaJS](http://vanilla-js.com/).
 1. Import polyfill:
 
     ```html
-    <script src="<path-to>/webcomponents.min.js"></script>
+    <script src="node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
     ```
+    [Link to source](https://github.com/webcomponents/polyfills/tree/master/packages/webcomponentsjs)
 
 2. Import custom element:
 
@@ -23,7 +24,7 @@ A small Web Component using [VanillaJS](http://vanilla-js.com/).
 3. Start using it!
 
     ```html
-    <donut-chart width="300" height="300" radius="40" stroke-width="30" items='...'></donut-chart>
+    <donut-chart></donut-chart>
     ```
 
 ## Attributes
