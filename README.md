@@ -16,7 +16,18 @@ npm i @frontend-trends/donut-chart -D
     import '@frontend-trends/donut-chart/donut-chart.js';
 </script>
 
-<donut-chart></donut-chart>
+<donut-chart width="250" height="250" radius="40" stroke-width="20" legend-position="right" data='[
+{
+    "color": "green",
+    "percent": 50,
+    "name": "VW"
+},
+{
+    "color": "pink",
+    "percent": 20,
+    "name": "Opel"
+}
+]'></donut-chart>
 ```
 
 For old browser add polyfill
