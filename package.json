@@ -1,12 +1,9 @@
 {
-  "name": "@frontend-trends/donut-chart",
-  "version": "1.1.0",
+  "name": "@frontend-trends/charts",
+  "version": "1.1.1",
   "description": "Web Component",
   "main": "index.js",
   "module": "index.js",
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
-  },
   "scripts": {
     "test": "karma start",
     "build": "rollup -c",
@@ -19,7 +16,7 @@
   "keywords": [
     "Web Component",
     "Donut Chart",
-    "Donut-Chart"
+    "Charts"
   ],
   "author": "Jeremiah <jeremia.nadler@gmail.com>",
   "license": "MIT",

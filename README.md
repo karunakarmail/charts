@@ -1,21 +1,21 @@
 # &lt;donut-chart&gt;
 
-A small Web Component using [VanillaJS](http://vanilla-js.com/). <br/>
-This webcomponent follows the [open-wc](https://github.com/open-wc/open-wc) recommendation.
-
-[Test it live!](http://donut-chart.surge.sh)
+A small Web Component library using [VanillaJS](http://vanilla-js.com/). <br/>
+This webcomponents follows the [open-wc](https://github.com/open-wc/open-wc) recommendation.
 
 ## Installation
 
 ```html
-npm i @frontend-trends/donut-chart -D
+npm i @frontend-trends/charts -D
 ```
 
-## Usage
+## Donut Chart
+
+### Usage
 
 ```html
 <script type="module">
-    import '@frontend-trends/donut-chart/donut-chart.js';
+    import '@frontend-trends/charts/donut-chart.js';
 </script>
 
 <donut-chart width="250" height="250" radius="40" stroke-width="20" legend-position="right" data='[
@@ -37,7 +37,7 @@ For old browser add polyfill
 <script src="node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
 ```
 
-## Attributes
+### Attributes
 | Attribute   |      Default      |  Description |
 |----------|-------------|------|
 | width |  300 | defines the width of the web component |
@@ -47,6 +47,10 @@ For old browser add polyfill
 | radius | 40 | defines the donut radius |
 | stroke-width | 30 | defines the stroke width of the donut |
 | data |  | stringified Array of Objects |
+
+### Demo
+
+[Test it live!](http://donut-chart.surge.sh)
 
 ## Testing using Karma
 
