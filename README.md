@@ -15,7 +15,7 @@ npm i @frontend-trends/charts -D
 
 ```html
 <script type="module">
-    import '@frontend-trends/charts/donut-chart.js';
+    import './node_modules/@frontend-trends/charts/donut-chart.js';
 </script>
 
 <donut-chart width="250" height="250" radius="40" stroke-width="20" legend-position="right" data='[
