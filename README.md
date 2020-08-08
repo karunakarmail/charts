@@ -34,7 +34,7 @@ npm i @frontend-trends/charts -D
 
 For old browser add polyfill
 ```html
-<script src="node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+<script src="./node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
 ```
 
 ### Attributes
