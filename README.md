@@ -1,4 +1,4 @@
-# &lt;donut-chart&gt;
+# &lt;charts&gt;
 
 A small Web Component library using [VanillaJS](http://vanilla-js.com/). <br/>
 This webcomponents follows the [open-wc](https://github.com/open-wc/open-wc) recommendation.
