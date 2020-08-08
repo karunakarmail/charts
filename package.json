@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/frontend-trends/donut-chart.git"
+    "url": "git+https://github.com/frontend-trends/charts.git"
   },
   "keywords": [
     "Web Component",
@@ -22,9 +22,9 @@
   "author": "Jeremiah <jeremia.nadler@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/frontend-trends/donut-chart/issues"
+    "url": "https://github.com/frontend-trends/charts/issues"
   },
-  "homepage": "https://github.com/frontend-trends/donut-chart#readme",
+  "homepage": "https://github.com/frontend-trends/charts#readme",
   "devDependencies": {
     "@babel/plugin-transform-runtime": "^7.11.0",
     "@babel/preset-env": "^7.11.0",
