@@ -10,7 +10,7 @@ This webcomponents follows the [open-wc](https://github.com/open-wc/open-wc) rec
 ## Installation
 
 ```html
-npm i @frontend-trends/charts -D
+npm i @frontend-trends/charts --save
 ```
 
 ## Donut Chart
