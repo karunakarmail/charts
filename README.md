@@ -44,8 +44,8 @@ For old browser add polyfill
 ### Attributes
 | Attribute   |      Default      |  Description |
 |----------|-------------|------|
-| width |  300 | defines the width of the web component |
-| height | 300 | defines the height of the web component |
+| width |  300 | defines the width of the chart |
+| height | 300 | defines the height of the chart |
 | legend-position | right | defines the legend position |
 | highlight-color | #a8d1ff | defines the highlight color |
 | radius | 40 | defines the donut radius |
@@ -87,11 +87,11 @@ For old browser add polyfill
 ### Attributes
 | Attribute   |      Default      |  Description |
 |----------|-------------|------|
-| width |  300 | defines the width of the web component |
-| height | 300 | defines the height of the web component |
+| width |  300 | defines the width of the chart |
+| height | 300 | defines the height of the chart |
 | legend-position | right | defines the legend position |
 | highlight-color | #a8d1ff | defines the highlight color |
-| bar-width | 30 | defines the stroke width of the donut |
+| bar-width | 30 | defines the width of each bar |
 | data |  | stringified Array of Objects |
 
 ## Testing using Karma
