@@ -60,18 +60,23 @@ For old browser add polyfill
 <bar-chart width="200" height="200" bar-width="20" legend-position="bottom" data='[
 {
     "color": "#555594",
-    "percent": 80,
-    "name": "Strongly agree"
+    "percent": 75,
+    "name": "Bicycle"
+},
+{
+    "color": "#28dcc5",
+    "percent": 60,
+    "name": "Car"
 },
 {
     "color": "#b1196b",
-    "percent": 70,
-    "name": "Neither agree nor disagree"
+    "percent": 95,
+    "name": "Tram"
 },
 {
     "color": "#2079b1",
-    "percent": 80,
-    "name": "Somewhat disagree"
+    "percent": 45,
+    "name": "Skateboard"
 }]'></bar-chart>
 ```
 
