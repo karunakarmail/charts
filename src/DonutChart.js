@@ -13,7 +13,7 @@ export class DonutChart extends HTMLElement {
         const styleNode = `
         <style type="text/css">
             #donut-chart {
-                ${attributes.legendPositon === 'right' && 'display: flex;'}
+                ${attributes.legendPositon === 'right' ? 'display: flex;' : ''}
             }
 
             @media screen and (max-width: 600px) {
@@ -43,6 +43,7 @@ export class DonutChart extends HTMLElement {
                 display: inline-flex;
                 align-items: center;
                 margin-bottom: 5px;
+                white-space: nowrap;
                 padding: 0 3px;
             }
 
@@ -155,7 +156,7 @@ export class DonutChart extends HTMLElement {
                 ${chartData.map((item) => {
                     nameItems += `<div class="name-item"><div class="square" style="background:${item.color}; border-color: ${item.color}"></div>${item.name}&nbsp;&nbsp;${item.originPercent} %</div><br/>`;
                     return `<circle cx="${center.x}" cy="${center.y}" r="${radius}" fill="transparent" stroke-width="${strokeWidth}" stroke="${item.color}" data-fill="${item.percent}" class="circle"/>`;
-                })}
+                }).join('')}
             </svg>
             <div class="legend">${nameItems}</div>
         </div>
