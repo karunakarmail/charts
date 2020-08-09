@@ -3,6 +3,10 @@
 A small Web Component library using [VanillaJS](http://vanilla-js.com/). <br/>
 This webcomponents follows the [open-wc](https://github.com/open-wc/open-wc) recommendation.
 
+### Demo
+
+[Test it live!](https://frontend-trends-charts.surge.sh)
+
 ## Installation
 
 ```html
@@ -89,10 +93,6 @@ For old browser add polyfill
 | highlight-color | #a8d1ff | defines the highlight color |
 | bar-width | 30 | defines the stroke width of the donut |
 | data |  | stringified Array of Objects |
-
-### Demo
-
-[Test it live!](http://donut-chart.surge.sh)
 
 ## Testing using Karma
 
