@@ -129,7 +129,7 @@ export class BarChart extends HTMLElement {
             <div class="bars">
             ${chartData.map((item) => {
                 nameItems += `<div class="name-item"><div class="square" style="background:${item.color}; border-color: ${item.color}"></div>${item.name}&nbsp;&nbsp;${item.percent} %</div><br/>`;
-                return `<div class="bar" style="height: ${item.percent}%; background: ${item.color}"></div>`;
+                return `<div class="bar" style="height: ${item.percent}%; background: ${item.color};"></div>`;
             }).join('')}
             </div>
             <div class="legend">${nameItems}</div>
