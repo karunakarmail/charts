@@ -16,7 +16,6 @@ npm i @frontend-trends/charts -D
 ```html
 <script type="module">
     import './node_modules/@frontend-trends/charts/donut-chart.js';
-    import './node_modules/@frontend-trends/charts/bar-chart.js';
 </script>
 
 <donut-chart width="250" height="250" radius="40" stroke-width="20" legend-position="right" data='[
@@ -54,6 +53,10 @@ For old browser add polyfill
 ### Usage
 
 ```html
+<script type="module">
+    import './node_modules/@frontend-trends/charts/bar-chart.js';
+</script>
+
 <bar-chart width="200" height="200" bar-width="20" legend-position="bottom" data='[
 {
     "color": "#555594",
