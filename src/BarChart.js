@@ -5,7 +5,6 @@ export class BarChart extends HTMLElement {
 
     constructor() {
         super();
-        this.highlightClass = 'highlight';
 
         const attributes = this.getAttributes(this);
         const shadowRoot = this.attachShadow({mode: 'open'});
@@ -20,9 +19,11 @@ export class BarChart extends HTMLElement {
               visibility: visible;
             }
         }
-          
-        #bar-chart {
-            ${attributes.legendPositon === 'right' ? 'display: flex;' : 'display: inline;'}
+
+        .bar-chart-data {
+            display: flex;
+            width: ${attributes.width}px;
+            height: ${attributes.height}px;
         }
 
         @media screen and (max-width: 600px) {
@@ -35,12 +36,32 @@ export class BarChart extends HTMLElement {
             }
         }
 
-        .bars {
+        .chart-data {
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
-            height: ${attributes.height}px;
-            width: ${attributes.width}px;
+            width: 100%;
+            height: 100%;
+        }
+
+        .bar-group {
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            height: 100%;
+        }
+
+        .bar-group:only-child {
+            width: 100%;
+        }
+
+        .bar-group-name {
+            position: absolute;
+            top: calc(100% + 10px);
+            line-height: 10px;
+            left: 50%;
+            transform: translateX(-50%);
         }
 
         .bar {
@@ -48,32 +69,25 @@ export class BarChart extends HTMLElement {
             animation-timing-function: cubic-bezier(.35,.95,.67,.99);
             animation-duration: .4s;
             animation-fill-mode: forwards;
-            cursor: pointer;
             height: 0;
-            width: ${attributes.barWidth}%;
-        }
-
-        .bar.highlight {
-            background: ${attributes.highlightColor} !important;
+            width: ${attributes.barWidth}px;
         }
 
         .legend {
-            padding-top: 20px;
-            ${attributes.legendPositon === 'right' ? 'margin-left: 30px;padding-top: 40px;' : ''}
+            display: flex;
+            justify-content: flex-end;
+            flex-wrap: wrap;
+            padding-top: 30px;
             user-select: none;
-            cursor: pointer;
+            max-width: ${attributes.width}px;
         }
 
         .name-item {
             display: inline-flex;
             align-items: center;
             white-space: nowrap;
-            margin-bottom: 5px;
+            margin-left: 8px;
             padding: 0 3px;
-        }
-
-        .name-item.highlight {
-            background: ${attributes.highlightColor};
         }
 
         .square {
@@ -82,55 +96,71 @@ export class BarChart extends HTMLElement {
             height: 10px;
             margin-right: 10px;
         }
+
+        .y-axis {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            height: 100%;
+            margin-right: 15px;
+            line-height: 0;
+        }
         </style>`;
 
-        shadowRoot.innerHTML = styleNode + this.getHtml(attributes.items);
-
-        const nameItems = shadowRoot.querySelectorAll('.name-item');
-        const bars = shadowRoot.querySelectorAll('.bar');
-
-        nameItems.forEach((nameItem, index) => {
-            nameItem.addEventListener('click', (e) => {
-                const toggleCondition = e.currentTarget.classList.contains(this.highlightClass);
-                this.unHighlightAllChartItems(shadowRoot.querySelectorAll(`.${this.highlightClass}`));
-                this.highlightChartItem(e.currentTarget, bars[index], toggleCondition);
-            });
-        });
-    }
-
-    unHighlightAllChartItems(highlightedElements) {
-        highlightedElements.forEach((highlightedElement) => {
-            highlightedElement.classList.remove(this.highlightClass);
-        });
-    }
-
-    highlightChartItem(nameItem, bar, toggleCondition) {
-        bar.classList.toggle(this.highlightClass, !toggleCondition);
-        nameItem.classList.toggle(this.highlightClass, !toggleCondition);
+        shadowRoot.innerHTML = styleNode + this.getHtml(attributes.data, attributes.width, attributes.height);
     }
 
     getAttributes(element) {
         const attributes = {};
-        attributes.items = JSON.parse(element.getAttribute('data'));
+        attributes.data = JSON.parse(element.getAttribute('data'));
 
-        attributes.legendPositon = element.getAttribute('legend-position') || 'bottom';
         attributes.barWidth = parseInt(element.getAttribute('bar-width')) || 20;
         attributes.height = parseInt(element.getAttribute('height')) || 200;
         attributes.width = parseInt(element.getAttribute('width')) || 200;
-        attributes.highlightColor = element.getAttribute('highlight-color') || '#a8d1ff';
         return attributes;
+    }
+
+    getMaxAmount(chartData) {
+        let maximum = 0;
+        chartData.forEach((item) => {
+            item.barGroup.forEach((bar) => {
+                if (bar.amount > maximum) {
+                    maximum = bar.amount;
+                }
+            })
+        });
+        return maximum;
+    }
+
+    getBarHeight(maxAmount, amount) {
+        return `${100 / maxAmount * amount}%`;
     }
 
     getHtml(chartData) {
         let nameItems = '';
-       
+        const maxAmount = this.getMaxAmount(chartData);
         return `
         <div id="bar-chart">
-            <div class="bars">
-            ${chartData.map((item) => {
-                nameItems += `<div class="name-item"><div class="square" style="background:${item.color}; border-color: ${item.color}"></div>${item.name}&nbsp;&nbsp;${item.percent} %</div><br/>`;
-                return `<div class="bar" style="height: ${item.percent}%; background: ${item.color};"></div>`;
-            }).join('')}
+            <div class="bar-chart-data">
+                <div class="y-axis">
+                    <div>${maxAmount}</div>
+                    <div>${parseInt(maxAmount / 2)}</div>
+                    <div>0</div>
+                </div>
+                <div class="chart-data">
+                    ${chartData.map((item, index) => {
+                        return `<div class="bar-group">
+                        ${item.barGroup.map((item) => {
+                            if (index === 0) {
+                                nameItems += `<div class="name-item"><div class="square" style="background:${item.color}; border-color: ${item.color}"></div>${item.name}</div><br/>`;
+                            }
+                            return `<div class="bar" style="height: ${this.getBarHeight(maxAmount, item.amount)}; background: ${item.color};"></div>`;
+                        }).join('')}
+                        <div class="bar-group-name">${item.name}</div>
+                        </div>`;
+                    }).join('')}
+                </div>
             </div>
             <div class="legend">${nameItems}</div>
         </div> 

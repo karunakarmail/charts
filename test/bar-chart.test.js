@@ -3,45 +3,64 @@ import { TestUtils } from './test-utils';
 window.customElements.define('bar-chart', BarChart);
 
 describe('<bar-chart>', () => {
+    const chartData = [{
+        "name": "",
+        "barGroup": [
+            {
+                "color": "#555594",
+                "amount": 75,
+                "name": "Bicycle"
+            },
+            {
+                "color": "#28dcc5",
+                "amount": 60,
+                "name": "Car"
+            },
+            {
+                "color": "#b1196b",
+                "amount": 80,
+                "name": "Tram"
+            },
+            {
+                "color": "#2079b1",
+                "amount": 45,
+                "name": "Skateboard"
+            }
+        ]
+    }];
+
     it('should render', async () => {
         const {shadowRoot} = await TestUtils.render(BarChart.tag, {
-            data: JSON.stringify([
-                {
-                    color: "#555594",
-                    percent: 95,
-                    name: "Bicycle"
-                },
-                {
-                    color: "#28dcc5",
-                    percent: 60,
-                    name: "Car"
-                },
-            ]),
-            width: 200,
-            height: 200,
-            'bar-width': 20
+            data: JSON.stringify(chartData)
         });
-        const bars = shadowRoot.querySelectorAll('div.bar');
-        expect(bars.length).toEqual(2);
-        expect(bars[0].getAttribute('style')).toEqual('height: 95%; background: #555594;');
-        expect(bars[1].getAttribute('style')).toEqual('height: 60%; background: #28dcc5;');
+        const barGroups = shadowRoot.querySelectorAll('.bar-group');
+        expect(barGroups.length).toEqual(1);
+
+        const bars = shadowRoot.querySelectorAll('.bar-group .bar');
+        expect(bars.length).toEqual(4);
+        expect(bars[0].getAttribute('style')).toEqual('height: 93.75%; background: #555594;');
+        expect(bars[1].getAttribute('style')).toEqual('height: 75%; background: #28dcc5;');
+        expect(bars[2].getAttribute('style')).toEqual('height: 100%; background: #b1196b;');
+        expect(bars[3].getAttribute('style')).toEqual('height: 56.25%; background: #2079b1;');
 
         // legend start
         const legendItems = shadowRoot.querySelectorAll('.legend .name-item');
-        expect(legendItems.length).toEqual(2);
-        expect(shadowRoot.querySelectorAll('.legend .name-item.highlight').length).toEqual(0);
-        expect(legendItems[0].textContent).toEqual('Bicycle  95 %');
-        expect(legendItems[1].textContent).toEqual('Car  60 %');
+        expect(legendItems.length).toEqual(4);
+        expect(legendItems[0].textContent).toEqual('Bicycle');
+        expect(legendItems[1].textContent).toEqual('Car');
 
-        legendItems[0].click();
-        expect(legendItems[0].classList.contains('highlight')).toBeTrue;
-        legendItems[0].click();
-        expect(legendItems[0].classList.contains('highlight')).toBeFalse;
-
-        legendItems[0].click();
-        legendItems[1].click();
-        expect(legendItems[0].classList.contains('highlight')).toBeFalse;
-        expect(legendItems[1].classList.contains('highlight')).toBeTrue;
-        // legend end
+        const yAxisItems = shadowRoot.querySelectorAll('.bar-chart-data .y-axis div');
+        expect(yAxisItems.length).toEqual(3)
+        expect(yAxisItems[0].textContent).toEqual('80');
+        expect(yAxisItems[1].textContent).toEqual('40');
     });
+
+    it('Should get max amount', () => {
+        expect(BarChart.prototype.getMaxAmount(chartData)).toEqual(80);
+    });
+
+    it('Should get bar height', () => {
+        expect(BarChart.prototype.getBarHeight(80, 60)).toEqual(75);
+    });
+
 });

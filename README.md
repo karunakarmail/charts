@@ -23,16 +23,8 @@ npm i @frontend-trends/charts --save
 </script>
 
 <donut-chart width="250" height="250" radius="40" stroke-width="20" legend-position="right" data='[
-{
-    "color": "green",
-    "percent": 50,
-    "name": "VW"
-},
-{
-    "color": "pink",
-    "percent": 20,
-    "name": "Opel"
-}
+{ "color": "green", "percent": 50, "name": "VW" },
+{ "color": "pink", "percent": 20, "name": "Opel" }
 ]'></donut-chart>
 ```
 
@@ -44,8 +36,7 @@ For old browser add polyfill
 ### Attributes
 | Attribute   |      Default      |  Description |
 |----------|-------------|------|
-| width |  300 | defines the width of the chart |
-| height | 300 | defines the height of the chart |
+| width / height |  250 | defines the width / height of the chart |
 | legend-position | right | defines the legend position |
 | highlight-color | #a8d1ff | defines the highlight color |
 | radius | 40 | defines the donut radius |
@@ -61,36 +52,26 @@ For old browser add polyfill
     import './node_modules/@frontend-trends/charts/bar-chart.js';
 </script>
 
-<bar-chart width="200" height="200" bar-width="20" legend-position="bottom" data='[
+<bar-chart width="400" height="300" bar-width="30" data='[
 {
-    "color": "#555594",
-    "percent": 75,
-    "name": "Bicycle"
+    "name": "spring",
+    "barGroup": [
+        { "color": "#555594", "amount": 50, "name": "Bicycle" }, { "color": "#28dcc5", "amount": 60, "name": "Car" }
+    ]
 },
 {
-    "color": "#28dcc5",
-    "percent": 60,
-    "name": "Car"
-},
-{
-    "color": "#b1196b",
-    "percent": 95,
-    "name": "Tram"
-},
-{
-    "color": "#2079b1",
-    "percent": 45,
-    "name": "Skateboard"
+    "name": "summer",
+    "barGroup": [
+        { "color": "#555594", "amount": 90, "name": "Bicycle" },
+        { "color": "#28dcc5",  "amount": 30, "name": "Car" }
+    ]
 }]'></bar-chart>
 ```
 
 ### Attributes
 | Attribute   |      Default      |  Description |
 |----------|-------------|------|
-| width |  300 | defines the width of the chart |
-| height | 300 | defines the height of the chart |
-| legend-position | right | defines the legend position |
-| highlight-color | #a8d1ff | defines the highlight color |
+| width / height |  300 | defines the width / height of the chart |
 | bar-width | 30 | defines the width of each bar |
 | data |  | stringified Array of Objects |
 
