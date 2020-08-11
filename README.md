@@ -56,7 +56,8 @@ For old browser add polyfill
 {
     "name": "spring",
     "barGroup": [
-        { "color": "#555594", "amount": 50, "name": "Bicycle" }, { "color": "#28dcc5", "amount": 60, "name": "Car" }
+        { "color": "#555594", "amount": 50, "name": "Bicycle" },
+        { "color": "#28dcc5", "amount": 60, "name": "Car" }
     ]
 },
 {
