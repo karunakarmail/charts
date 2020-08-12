@@ -10,7 +10,7 @@ This webcomponents follows the [open-wc](https://github.com/open-wc/open-wc) rec
 ## Installation
 
 ```html
-npm i @frontend-trends/charts --save
+$ npm i @frontend-trends/charts --save
 ```
 
 ## Donut Chart
@@ -77,8 +77,6 @@ For old browser add polyfill
 | unit |  | defines the unit |
 | data |  | stringified Array of Objects |
 
-## Testing using Karma
+## License
 
-```html
-npm run test
-```
+<img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT License">
