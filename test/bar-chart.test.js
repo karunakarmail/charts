@@ -60,7 +60,6 @@ describe('<bar-chart>', () => {
     });
 
     it('Should get bar height', () => {
-        expect(BarChart.prototype.getBarHeight(80, 60)).toEqual(75);
+        expect(BarChart.prototype.getBarHeight(80, 60)).toEqual('75%');
     });
-
 });
