@@ -108,7 +108,7 @@ export class BarChart extends HTMLElement {
         }
         </style>`;
 
-        shadowRoot.innerHTML = styleNode + this.getHtml(attributes.data, attributes.width, attributes.height);
+        shadowRoot.innerHTML = styleNode + this.getHtml(attributes.data, attributes.unit);
     }
 
     getAttributes(element) {
@@ -118,6 +118,7 @@ export class BarChart extends HTMLElement {
         attributes.barWidth = parseInt(element.getAttribute('bar-width')) || 20;
         attributes.height = parseInt(element.getAttribute('height')) || 200;
         attributes.width = parseInt(element.getAttribute('width')) || 200;
+        attributes.unit = element.getAttribute('unit') || '';
         return attributes;
     }
 
@@ -137,8 +138,9 @@ export class BarChart extends HTMLElement {
         return `${100 / maxAmount * amount}%`;
     }
 
-    getHtml(chartData) {
-        let nameItems = '';
+    getHtml(chartData, unit) {
+        let legendDom = '';
+        const nameItems = [];
         const maxAmount = this.getMaxAmount(chartData);
         return `
         <div id="bar-chart">
@@ -149,20 +151,21 @@ export class BarChart extends HTMLElement {
                     <div>0</div>
                 </div>
                 <div class="chart-data">
-                    ${chartData.map((item, index) => {
+                    ${chartData.map((item) => {
                         return `<div class="bar-group">
-                        ${item.barGroup.map((item) => {
-                            if (index === 0) {
-                                nameItems += `<div class="name-item"><div class="square" style="background:${item.color}; border-color: ${item.color}"></div>${item.name}</div><br/>`;
+                        ${item.barGroup.map((bar) => {
+                            if (!nameItems.includes(bar.name)) {
+                                nameItems.push(bar.name);
+                                legendDom += `<div class="name-item"><div class="square" style="background:${bar.color}; border-color: ${bar.color}"></div>${bar.name}</div><br/>`;
                             }
-                            return `<div class="bar" style="height: ${this.getBarHeight(maxAmount, item.amount)}; background: ${item.color};"></div>`;
+                            return `<div class="bar" title="${bar.name} ${bar.amount} ${unit}" style="height: ${this.getBarHeight(maxAmount, bar.amount)}; background: ${bar.color};"></div>`;
                         }).join('')}
                         <div class="bar-group-name">${item.name}</div>
                         </div>`;
                     }).join('')}
                 </div>
             </div>
-            <div class="legend">${nameItems}</div>
+            <div class="legend">${legendDom}</div>
         </div> 
         `;
     }

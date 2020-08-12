@@ -18,7 +18,9 @@ export class DonutChart extends HTMLElement {
 
             @media screen and (max-width: 600px) {
                 #donut-chart {
-                    display: block;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
                 }
             }
 

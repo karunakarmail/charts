@@ -74,6 +74,7 @@ For old browser add polyfill
 |----------|-------------|------|
 | width / height |  300 | defines the width / height of the chart |
 | bar-width | 30 | defines the width of each bar |
+| unit |  | defines the unit |
 | data |  | stringified Array of Objects |
 
 ## Testing using Karma
