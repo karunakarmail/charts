@@ -31,5 +31,6 @@ const bundle2 = {
 
 
 export default [
-  Object.assign({},bundle1, bundle2),
+  bundle1,
+  bundle2
 ]

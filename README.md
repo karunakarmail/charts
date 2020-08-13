@@ -3,8 +3,6 @@
 A Chart Library with [VanillaJS](http://vanilla-js.com/) Web Components that follow the [open-wc](https://github.com/open-wc/open-wc) recommendation.
 <br/><br/><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT License">
 
-### Demo
-
 [Test it live!](https://frontend-trends-charts.surge.sh)
 
 ## Installation
