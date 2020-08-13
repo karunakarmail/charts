@@ -125,7 +125,7 @@ export class BarChart extends HTMLElement {
     getMaxAmount(chartData) {
         let maximum = 0;
         chartData.forEach((item) => {
-            item.barGroup.forEach((bar) => {
+            item.group.forEach((bar) => {
                 if (bar.amount > maximum) {
                     maximum = bar.amount;
                 }
@@ -153,7 +153,7 @@ export class BarChart extends HTMLElement {
                 <div class="chart-data">
                     ${chartData.map((item) => {
                         return `<div class="bar-group">
-                        ${item.barGroup.map((bar) => {
+                        ${item.group.map((bar) => {
                             if (!nameItems.includes(bar.name)) {
                                 nameItems.push(bar.name);
                                 legendDom += `<div class="name-item"><div class="square" style="background:${bar.color}; border-color: ${bar.color}"></div>${bar.name}</div><br/>`;

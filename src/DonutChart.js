@@ -108,10 +108,10 @@ export class DonutChart extends HTMLElement {
         const attributes = {};
         attributes.items = this.sortItems(JSON.parse(element.getAttribute('data')));
 
-        attributes.legendPositon = element.getAttribute('legend-position') || 'bottom';
+        attributes.legendPositon = element.getAttribute('legend') || 'bottom';
         attributes.radius = parseInt(element.getAttribute('radius')) || 40;
         attributes.strokeWidth = parseInt(element.getAttribute('stroke-width')) || 20;
-        attributes.highlightColor = element.getAttribute('highlight-color') || '#a8d1ff';
+        attributes.highlightColor = element.getAttribute('highlight') || '#a8d1ff';
         attributes.size = {
             width: parseInt(element.getAttribute('width')) || 250,
             height: parseInt(element.getAttribute('height')) ||250

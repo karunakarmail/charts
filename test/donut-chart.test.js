@@ -21,7 +21,7 @@ describe('<donut-chart>', () => {
             height: 200,
             radius: 40,
             'stroke-width': 20,
-            'legend-position': "right"
+            'legend': "right"
         });
         const circles = shadowRoot.querySelectorAll('circle.circle');
         expect(circles.length).toEqual(2);

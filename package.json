@@ -19,7 +19,8 @@
   "keywords": [
     "Web Component",
     "Donut Chart",
-    "Charts"
+    "Charts",
+    "Bar Chart"
   ],
   "author": "Jeremiah <jeremia.nadler@gmail.com>",
   "license": "MIT",

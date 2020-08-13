@@ -5,7 +5,7 @@ window.customElements.define('bar-chart', BarChart);
 describe('<bar-chart>', () => {
     const chartData = [{
         "name": "",
-        "barGroup": [
+        "group": [
             {
                 "color": "#555594",
                 "amount": 75,
@@ -33,8 +33,8 @@ describe('<bar-chart>', () => {
         const {shadowRoot} = await TestUtils.render(BarChart.tag, {
             data: JSON.stringify(chartData)
         });
-        const barGroups = shadowRoot.querySelectorAll('.bar-group');
-        expect(barGroups.length).toEqual(1);
+        const groups = shadowRoot.querySelectorAll('.bar-group');
+        expect(groups.length).toEqual(1);
 
         const bars = shadowRoot.querySelectorAll('.bar-group .bar');
         expect(bars.length).toEqual(4);

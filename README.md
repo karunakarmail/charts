@@ -1,7 +1,7 @@
 # &lt;charts&gt;
 
-A small Web Component library using [VanillaJS](http://vanilla-js.com/). <br/>
-This webcomponents follows the [open-wc](https://github.com/open-wc/open-wc) recommendation.
+A Chart Library with [VanillaJS](http://vanilla-js.com/) Web Components that follow the [open-wc](https://github.com/open-wc/open-wc) recommendation.
+<br/><br/><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT License">
 
 ### Demo
 
@@ -13,70 +13,59 @@ This webcomponents follows the [open-wc](https://github.com/open-wc/open-wc) rec
 $ npm i @frontend-trends/charts --save
 ```
 
-## Donut Chart
+Browser polyfill
+```html
+<script src="./node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+```
 
-### Usage
+## Donut Chart
 
 ```html
 <script type="module">
     import './node_modules/@frontend-trends/charts/donut-chart.js';
 </script>
 
-<donut-chart width="250" height="250" radius="40" stroke-width="20" legend-position="right" data='[
+<donut-chart width="250" radius="40" stroke-width="20" legend="right" data='[
 { "color": "green", "percent": 50, "name": "VW" },
 { "color": "pink", "percent": 20, "name": "Opel" }
 ]'></donut-chart>
 ```
 
-For old browser add polyfill
-```html
-<script src="./node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
-```
-
 ### Attributes
 | Attribute   |      Default      |  Description |
 |----------|-------------|------|
-| width / height |  250 | defines the width / height of the chart |
-| legend-position | right | defines the legend position |
-| highlight-color | #a8d1ff | defines the highlight color |
-| radius | 40 | defines the donut radius |
-| stroke-width | 30 | defines the stroke width of the donut |
-| data |  | stringified Array of Objects |
+| width / height |  250 | dimension |
+| legend | right | legend position |
+| highlight | #a8d1ff | highlight color |
+| radius | 40 | donut radius |
+| stroke-width | 30 | donut stroke width |
+| data |  | stringified Array |
 
 ## Bar Chart
-
-### Usage
 
 ```html
 <script type="module">
     import './node_modules/@frontend-trends/charts/bar-chart.js';
 </script>
 
-<bar-chart width="400" height="300" bar-width="30" data='[
+<bar-chart height="300" bar-width="30" data='[
 {
     "name": "spring",
-    "barGroup": [
+    "group": [
         { "color": "#555594", "amount": 50, "name": "Bicycle" },
         { "color": "#28dcc5", "amount": 60, "name": "Car" }
     ]
 },
-{
-    "name": "summer",
-    "barGroup": [
-        { "color": "#555594", "amount": 90, "name": "Bicycle" },
-        { "color": "#28dcc5",  "amount": 30, "name": "Car" }
-    ]
-}]'></bar-chart>
+...
+]'></bar-chart>
 ```
 
 ### Attributes
 | Attribute   |      Default      |  Description |
 |----------|-------------|------|
-| width / height |  300 | defines the width / height of the chart |
-| bar-width | 30 | defines the width of each bar |
-| unit |  | defines the unit |
-| data |  | stringified Array of Objects |
+| width / height |  300 | dimension |
+| bar-width | 30 | width of each bar |
+| unit |  | unit |
+| data |  | stringified Array |
 
-## License
 
-<img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT License">
